@@ -143,3 +143,17 @@ updateLogs()
 
 -- Écouter les changements d'attribut Logs
 LocalPlayer:GetAttributeChangedSignal("Logs"):Connect(updateLogs)
+
+-- NOUVEAU: Écouter l'événement GrantIncome pour afficher feedback visuel
+local remotesFolder = ReplicatedStorage:WaitForChild("Remotes")
+local grantIncomeEvent = remotesFolder:WaitForChild("GrantIncome")
+
+grantIncomeEvent.OnClientEvent:Connect(function(amount)
+    print("[EconomyClient] 💰 Revenu TIC reçu:", amount, "$")
+    -- Afficher feedback visuel
+    if amount > 0 then
+        feedback:Show(amount, "Revenu camping", 1)
+    end
+end)
+
+print("[EconomyClient] ✅ Client d'économie initialisé avec listener GrantIncome")

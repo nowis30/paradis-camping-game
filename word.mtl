@@ -1,0 +1,494 @@
+newmtl Spawnlocation1Mtl
+Material Color
+Ka 0.373615 0.368591 0.383775
+Kd 0.373615 0.368591 0.383775
+Ks 0.0234425 0.0231273 0.02408 
+
+d 1
+
+Ns 0
+
+newmtl S1Mtl
+Material Color
+Ka 0.00258583 0.00258583 0.00258583
+Kd 0.00258583 0.00258583 0.00258583
+Ks 0.000162248 0.000162248 0.000162248 
+
+d 1
+
+Ns 0
+
+newmtl Handle4Mtl
+Material Color
+Ka 1 1 1
+Kd 1 1 1
+Ks 0.0627451 0.0627451 0.0627451 
+
+d 1
+
+Ns 0
+
+map_Ka Handle4_diff.png
+map_Kd Handle4_diff.png
+map_d Handle4_diff.png
+
+newmtl Spawnlocation2Mtl
+Material Color
+Ka 1 1 1
+Kd 1 1 1
+Ks 0.0627451 0.0627451 0.0627451 
+
+d 1
+
+Ns 0
+
+map_Ka Spawnlocation2_diff.png
+map_Kd Spawnlocation2_diff.png
+map_d Spawnlocation2_diff.png
+
+newmtl Nowis3001Mtl
+Material Color
+Ka 1 1 1
+Kd 1 1 1
+Ks 0.0627451 0.0627451 0.0627451 
+
+d 1
+
+Ns 0
+
+map_Ka Nowis3001_diff.png
+map_Kd Nowis3001_diff.png
+map_d Nowis3001_diff.png
+
+newmtl Part1Mtl
+Material Color
+Ka 0.00258583 0.00258583 0.00258583
+Kd 0.00258583 0.00258583 0.00258583
+Ks 0.00102419 0.00102419 0.00102419 
+
+d 1
+
+Ns 0
+
+newmtl Handle1Mtl
+Material Color
+Ka 1 1 1
+Kd 1 1 1
+Ks 0.0627451 0.0627451 0.0627451 
+
+d 1
+
+Ns 0
+
+map_Ka Handle1_diff.png
+map_Kd Handle1_diff.png
+map_d Handle1_diff.png
+
+newmtl Part80Mtl
+Material Color
+Ka 0.00969633 0.21952 0.00837312
+Kd 0.00969633 0.21952 0.00837312
+Ks 0.000266174 0.00602603 0.00022985 
+
+d 1
+
+Ns 0
+
+map_Ka Plottoprowright011_diff.png
+map_Kd Plottoprowright011_diff.png
+map_d Plottoprowright011_diff.png
+
+map_Bump Plottoprowright011_nmap.png
+
+map_Ns Plottoprowright011_spec.png
+
+newmtl Part3Mtl
+Material Color
+Ka 0.940601 0.940601 0.940601
+Kd 0.940601 0.940601 0.940601
+Ks 0.372552 0.372552 0.372552 
+
+d 1
+
+Ns 0
+
+newmtl Plottoprowright011Mtl
+Material Color
+Ka 0.12753 0.493616 0.173439
+Kd 0.12753 0.493616 0.173439
+Ks 0.00350082 0.0135502 0.00476107 
+
+d 1
+
+Ns 0
+
+map_Ka Plottoprowright011_diff.png
+map_Kd Plottoprowright011_diff.png
+map_d Plottoprowright011_diff.png
+
+map_Bump Plottoprowright011_nmap.png
+
+map_Ns Plottoprowright011_spec.png
+
+newmtl Truss1Mtl
+Material Color
+Ka 0.940601 0.940601 0.940601
+Kd 0.940601 0.940601 0.940601
+Ks 0.0590181 0.0590181 0.0590181 
+
+d 1
+
+Ns 0
+
+newmtl Part9Mtl
+Material Color
+Ka 0.20471 0.106156 0.0581872
+Kd 0.20471 0.106156 0.0581872
+Ks 0.0152529 0.00790967 0.00433552 
+
+d 1
+
+Ns 0
+
+map_Ka Part9_diff.png
+map_Kd Part9_diff.png
+map_d Part9_diff.png
+
+map_Bump Part9_nmap.png
+
+map_Ns Part9_spec.png
+
+newmtl Part11Mtl
+Material Color
+Ka 0.000107187 0.436813 0.84337
+Kd 0.000107187 0.436813 0.84337
+Ks 6.72548e-06 0.0274079 0.0529173 
+
+d 1
+
+Ns 0
+
+newmtl Fishingspot41Mtl
+Material Color
+Ka 0.464741 0.267358 0.101145
+Kd 0.464741 0.267358 0.101145
+Ks 0.0346278 0.0199208 0.00753631 
+
+d 1
+
+Ns 0
+
+map_Ka Part9_diff.png
+map_Kd Part9_diff.png
+map_d Part9_diff.png
+
+map_Bump Part9_nmap.png
+
+map_Ns Part9_spec.png
+
+newmtl Legoboy2966com1Mtl
+Material Color
+Ka 1 1 1
+Kd 1 1 1
+Ks 0.0627451 0.0627451 0.0627451 
+
+d 1
+
+Ns 0
+
+map_Ka Legoboy2966com1_diff.png
+map_Kd Legoboy2966com1_diff.png
+map_d Legoboy2966com1_diff.png
+
+newmtl Handle2Mtl
+Material Color
+Ka 1 1 1
+Kd 1 1 1
+Ks 0.0627451 0.0627451 0.0627451 
+
+d 1
+
+Ns 0
+
+map_Ka Handle2_diff.png
+map_Kd Handle2_diff.png
+map_d Handle2_diff.png
+
+newmtl Handle3Mtl
+Material Color
+Ka 1 1 1
+Kd 1 1 1
+Ks 0.0627451 0.0627451 0.0627451 
+
+d 1
+
+Ns 0
+
+map_Ka Handle3_diff.png
+map_Kd Handle3_diff.png
+map_d Handle3_diff.png
+
+newmtl Union1Mtl
+Material Color
+Ka 0.00715504 0.018913 0.0315514
+Kd 0.00715504 0.018913 0.0315514
+Ks 0.000196413 0.00051918 0.000866117 
+
+d 1
+
+Ns 0
+
+map_Ka Plottoprowright011_diff.png
+map_Kd Plottoprowright011_diff.png
+map_d Plottoprowright011_diff.png
+
+map_Bump Plottoprowright011_nmap.png
+
+map_Ns Plottoprowright011_spec.png
+
+newmtl Metal1Mtl
+Material Color
+Ka 0.373615 0.368591 0.383775
+Kd 0.373615 0.368591 0.383775
+Ks 0.249077 0.245727 0.25585 
+
+d 1
+
+Ns 255
+
+map_Ka Metal1_diff.png
+map_Kd Metal1_diff.png
+map_d Metal1_diff.png
+
+map_Bump Metal1_nmap.png
+
+map_Ns Metal1_spec.png
+
+newmtl Ground1Mtl
+Material Color
+Ka 0.0619075 0.399293 0.111299
+Kd 0.0619075 0.399293 0.111299
+Ks 0.00169942 0.010961 0.00305528 
+
+d 1
+
+Ns 0
+
+map_Ka Plottoprowright011_diff.png
+map_Kd Plottoprowright011_diff.png
+map_d Plottoprowright011_diff.png
+
+map_Bump Plottoprowright011_nmap.png
+
+map_Ns Plottoprowright011_spec.png
+
+newmtl SwingMesh1Mtl
+Material Color
+Ka 0.00715504 0.018913 0.0315514
+Kd 0.00715504 0.018913 0.0315514
+Ks 0.000448943 0.0011867 0.0019797 
+
+d 1
+
+Ns 0
+
+newmtl Part35Mtl
+Material Color
+Ka 0.144972 0.0370285 0.000638183
+Kd 0.144972 0.0370285 0.000638183
+Ks 0.00795926 0.00203294 3.50375e-05 
+
+d 1
+
+Ns 0
+
+map_Ka Part35_diff.png
+map_Kd Part35_diff.png
+map_d Part35_diff.png
+
+map_Bump Part35_nmap.png
+
+map_Ns Part35_spec.png
+
+newmtl Part100Mtl
+Material Color
+Ka 0.409826 0.0891935 0
+Kd 0.409826 0.0891935 0
+Ks 0.0225002 0.0048969 0 
+
+d 1
+
+Ns 0
+
+map_Ka Part35_diff.png
+map_Kd Part35_diff.png
+map_d Part35_diff.png
+
+map_Bump Part35_nmap.png
+
+map_Ns Part35_spec.png
+
+newmtl SmoothBlockModel1Mtl
+Material Color
+Ka 0.560499 0.0169881 0.00775103
+Kd 0.560499 0.0169881 0.00775103
+Ks 0.0351686 0.00106592 0.000486339 
+
+d 1
+
+Ns 0
+
+newmtl Part36Mtl
+Material Color
+Ka 0.124741 0.113921 0.121986
+Kd 0.124741 0.113921 0.121986
+Ks 0.00391344 0.00357399 0.003827 
+
+d 1
+
+Ns 0
+
+map_Ka Part36_diff.png
+map_Kd Part36_diff.png
+map_d Part36_diff.png
+
+map_Bump Part36_nmap.png
+
+map_Ns Part36_spec.png
+
+newmtl Base1Mtl
+Material Color
+Ka 0.0581872 0.0277553 0.0169881
+Kd 0.0581872 0.0277553 0.0169881
+Ks 0.00319459 0.00152382 0.000932677 
+
+d 1
+
+Ns 0
+
+map_Ka Part35_diff.png
+map_Kd Part35_diff.png
+map_d Part35_diff.png
+
+map_Bump Part35_nmap.png
+
+map_Ns Part35_spec.png
+
+newmtl Part51Mtl
+Material Color
+Ka 0.12753 0.12753 0.157281
+Kd 0.12753 0.12753 0.157281
+Ks 0.00800187 0.00800187 0.0098686 
+
+d 1
+
+Ns 0
+
+newmtl Mazestart1Mtl
+Material Color
+Ka 0.12753 1 0.12753
+Kd 0.12753 1 0.12753
+Ks 0.0115027 0.0901961 0.0115027 
+
+d 0.301961
+
+Ns 0
+
+newmtl SmoothBlockModel7Mtl
+Material Color
+Ka 0.891262 0.899384 0.899384
+Kd 0.891262 0.899384 0.899384
+Ks 0.0559223 0.056432 0.056432 
+
+d 1
+
+Ns 0
+
+newmtl Meshpart1Mtl
+Material Color
+Ka 1 1 1
+Kd 1 1 1
+Ks 0.0627451 0.0627451 0.0627451 
+
+d 1
+
+Ns 0
+
+map_Ka Meshpart1_diff.png
+map_Kd Meshpart1_diff.png
+map_d Meshpart1_diff.png
+
+newmtl Meshpart3Mtl
+Material Color
+Ka 1 1 1
+Kd 1 1 1
+Ks 0.0627451 0.0627451 0.0627451 
+
+d 1
+
+Ns 0
+
+map_Ka Meshpart3_diff.png
+map_Kd Meshpart3_diff.png
+map_d Meshpart3_diff.png
+
+newmtl Toprow011Mtl
+Material Color
+Ka 0.0126637 0.0126637 0.0126637
+Kd 0.0126637 0.0126637 0.0126637
+Ks 0.000347632 0.000347632 0.000347632 
+
+d 1
+
+Ns 0
+
+map_Ka Toprow011_diff.png
+map_Kd Toprow011_diff.png
+map_d Toprow011_diff.png
+
+map_Bump Toprow011_nmap.png
+
+map_Ns Toprow011_spec.png
+
+newmtl Campingspawn1Mtl
+Material Color
+Ka 0.373615 0.368591 0.383775
+Kd 0.373615 0.368591 0.383775
+Ks 0.0234425 0.0231273 0.02408 
+
+d 0.803922
+
+Ns 0
+
+newmtl Islandwater1Mtl
+Material Color
+Ka 0.0169881 0.227137 0.409826
+Kd 0.0169881 0.227137 0.409826
+Ks 0.00106592 0.0142517 0.0257146 
+
+d 0.752941
+
+Ns 0
+
+map_Ka Lake1_diff.png
+map_Kd Lake1_diff.png
+map_d Lake1_diff.png
+
+map_Bump Lake1_nmap.png
+
+newmtl Lake1Mtl
+Material Color
+Ka 0.00902149 0.190463 0.383775
+Kd 0.00902149 0.190463 0.383775
+Ks 0.000566054 0.0119506 0.02408 
+
+d 0.803922
+
+Ns 0
+
+map_Ka Lake1_diff.png
+map_Kd Lake1_diff.png
+map_d Lake1_diff.png
+
+map_Bump Lake1_nmap.png
+

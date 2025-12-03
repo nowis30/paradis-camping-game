@@ -286,6 +286,9 @@ local function connectLogsAttribute()
 	end
 end
 
+connectToolActivated()
 connectLogPrompts()
 connectCampfirePrompt()
 connectLogsAttribute()
+
+print("[WoodcuttingFeedback] ✅ Système de coupe activé (Tool.Activated + ProximityPrompts)")

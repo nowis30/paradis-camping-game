@@ -344,11 +344,13 @@ end
 local INCOME_TICK_INTERVAL = 5 -- secondes entre chaque tick d'income
 
 task.spawn(function()
+    print("[CampingProgression] 🔥 Boucle de revenu TIC démarrée (intervalle:", INCOME_TICK_INTERVAL, "secondes)")
     while true do
         task.wait(INCOME_TICK_INTERVAL)
         
         -- Vérifier l'état du feu AVANT de distribuer les revenus
         local fireActive = isCampfireActive()
+        print("[CampingProgression] 💰 Tick de revenu - Feu actif:", fireActive)
         
         for _, player in ipairs(Players:GetPlayers()) do
             local income = PlayerProgressService.GetTotalIncomePerTick(player)
@@ -357,10 +359,20 @@ task.spawn(function()
                     -- Feu actif → donner le revenu
                     if EconomyService.AddCash then
                         EconomyService.AddCash(player, income)
+                        print(string.format("[CampingProgression] ✅ %s reçoit %d$ (revenu TIC)", player.Name, income))
+                        
+                        -- Notifier le client via RemoteEvent
+                        local economyRemotes = remotesFolder:FindFirstChild("EconomyRemotes")
+                        if economyRemotes then
+                            local grantIncome = economyRemotes:FindFirstChild("GrantIncome")
+                            if grantIncome and grantIncome:IsA("RemoteEvent") then
+                                grantIncome:FireClient(player, income)
+                            end
+                        end
                     end
                 else
-                    -- Feu éteint → notifier le joueur (optionnel)
-                    -- print(string.format("[CampingProgression] ⚠️ Feu éteint! Pas de revenu pour %s", player.Name))
+                    -- Feu éteint → notifier le joueur
+                    print(string.format("[CampingProgression] ⚠️ Feu éteint! Pas de revenu pour %s", player.Name))
                 end
             end
         end

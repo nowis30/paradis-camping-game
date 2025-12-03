@@ -42,6 +42,7 @@ local EVENT_NAMES = {
 	"LogsUpdated",
 	"CollectLog",
 	"FuelCampfire",
+	"GrantIncome",
 	"AxeUpgradeSucceeded",
 	"LegendaryPurchaseFailed",
 	"StartFishingMiniGame",

@@ -40,15 +40,22 @@ end
 -- Helper: Calculer l'income total du joueur
 local function calculateTotalIncome(player)
     local ownedItems = PlayerProgressService.GetAllOwnedItems(player)
+    if not ownedItems then
+        warn("[CampingDetailsService] ⚠️ OwnedItems nil pour", player.Name)
+        return 0
+    end
+    
     local totalIncome = 0
     
     for category, itemId in pairs(ownedItems) do
         local itemData = CampingItemsConfig.Items[itemId]
         if itemData and itemData.BaseIncome then
             totalIncome = totalIncome + itemData.BaseIncome
+            print(string.format("[CampingDetailsService] 💵 %s - %s: +%d$/tick", player.Name, itemData.DisplayName, itemData.BaseIncome))
         end
     end
     
+    print(string.format("[CampingDetailsService] 💰 Revenu total de %s: %d$/tick", player.Name, totalIncome))
     return totalIncome
 end
 
@@ -131,16 +138,35 @@ end
 
 -- Fonction principale : Obtenir les détails du camping pour un joueur
 function CampingDetailsService.GetCampingDetails(player)
+    print("[CampingDetailsService] 📋 GetCampingDetails appelé pour", player.Name)
+    
     if not player or not player:IsA("Player") then
+        warn("[CampingDetailsService] ❌ Joueur invalide")
         return nil
     end
     
     local plot = PlotService.GetPlotForPlayer(player)
     if not plot then
-        return nil
+        warn("[CampingDetailsService] ❌ Parcelle introuvable pour", player.Name)
+        -- Retourner des données par défaut au lieu de nil
+        return {
+            PlayerName = player.Name,
+            PlotId = "None",
+            Cash = 0,
+            TotalIncome = 0,
+            OwnedItems = {},
+            AvailableUpgrades = {},
+        }
     end
     
+    print("[CampingDetailsService] ✅ Parcelle trouvée:", plot.Id, "pour", player.Name)
+    
     local ownedItems = PlayerProgressService.GetAllOwnedItems(player)
+    if not ownedItems then
+        warn("[CampingDetailsService] ❌ OwnedItems nil pour", player.Name)
+        ownedItems = {}
+    end
+    
     local totalIncome = calculateTotalIncome(player)
     local cash = EconomyService.GetCash and EconomyService.GetCash(player) or 0
     
