@@ -1,0 +1,141 @@
+--[[
+    DataService
+    Responsable de la persistance simple des aménagements en DataStore.
+    Les autres scripts y accèdent via shared.ParadisDataService.
+]]
+
+local DataStoreService = game:GetService("DataStoreService")
+local RunService = game:GetService("RunService")
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+
+local configFolder = ReplicatedStorage:WaitForChild("Config")
+local CampConfig = require(configFolder:WaitForChild("CampConfig"))
+local EconomyConfig = require(configFolder:WaitForChild("EconomyConfig"))
+
+local STORE_NAME = "ParadisPlots_v2"
+local cache = {}
+local store
+
+local DEFAULT_CASH = (EconomyConfig.General and EconomyConfig.General.StartingCash) or 0
+
+local DEFAULT_DATA = {
+    Objects = {},
+    TrailerParts = {},
+    Cash = DEFAULT_CASH,
+    FishingGear = {
+        CurrentRod = "Basic",
+        CurrentBait = "Standard",
+        BaitUses = 5,
+        OwnedRods = {Basic = true},
+        FishInventory = {Common = 0, rare = 0, legendaire = 0},
+    },
+}
+
+local function deepCopyTable(tbl)
+    local clone = {}
+    for key, value in pairs(tbl) do
+        if type(value) == "table" then
+            clone[key] = deepCopyTable(value)
+        else
+            clone[key] = value
+        end
+    end
+    return clone
+end
+
+local function logDataStoreError(action, userId, err)
+    warn(string.format("[Paradis][DataStore][%s][User:%s] %s", action, tostring(userId), tostring(err)))
+end
+
+local STUDIO_READ_ONLY = RunService:IsStudio()
+local success, result = pcall(function()
+    if STUDIO_READ_ONLY then return nil end -- On ne crée pas de DataStore effectif en Studio si API désactivé
+    return DataStoreService:GetDataStore(STORE_NAME)
+end)
+if success then
+    store = result
+    if STUDIO_READ_ONLY then
+        warn("[Paradis][DataStore] Mode Studio détecté: lecture/écriture DataStore désactivées (utilisation cache seulement).")
+    end
+else
+    logDataStoreError("Init", "-", result)
+end
+
+local function normalizeData(data)
+    if type(data) ~= "table" then
+        data = deepCopyTable(DEFAULT_DATA)
+    end
+    data.Objects = type(data.Objects) == "table" and data.Objects or {}
+    data.TrailerParts = type(data.TrailerParts) == "table" and data.TrailerParts or {}
+    local cash = tonumber(data.Cash)
+    if cash == nil then
+        cash = DEFAULT_CASH
+    end
+    data.Cash = cash
+    
+    -- Normaliser FishingGear
+    if type(data.FishingGear) ~= "table" then
+        data.FishingGear = deepCopyTable(DEFAULT_DATA.FishingGear)
+    else
+        data.FishingGear.CurrentRod = data.FishingGear.CurrentRod or "Basic"
+        data.FishingGear.CurrentBait = data.FishingGear.CurrentBait or "Standard"
+        data.FishingGear.BaitUses = tonumber(data.FishingGear.BaitUses) or 5
+        if type(data.FishingGear.OwnedRods) ~= "table" then
+            data.FishingGear.OwnedRods = {Basic = true}
+        end
+        if type(data.FishingGear.FishInventory) ~= "table" then
+            data.FishingGear.FishInventory = {Common = 0, rare = 0, legendaire = 0}
+        end
+    end
+    
+    return data
+end
+
+local function loadPlayerData(userId)
+    if cache[userId] then
+        return cache[userId]
+    end
+
+    local data
+    if store and not STUDIO_READ_ONLY then
+        local ok, resultData = pcall(function()
+            return store:GetAsync(tostring(userId))
+        end)
+        if ok then
+            data = normalizeData(resultData)
+        else
+            logDataStoreError("Load", userId, resultData)
+            data = deepCopyTable(DEFAULT_DATA)
+        end
+    else
+        data = deepCopyTable(DEFAULT_DATA)
+    end
+
+    cache[userId] = data
+    return data
+end
+
+local function savePlayerData(userId, data)
+    data = normalizeData(data)
+    cache[userId] = data
+    if not store or STUDIO_READ_ONLY then
+        return
+    end
+
+    local ok, err = pcall(function()
+        store:SetAsync(tostring(userId), data)
+    end)
+    if not ok then
+        logDataStoreError("Save", userId, err)
+    end
+end
+
+local function getDefaultData()
+    return deepCopyTable(DEFAULT_DATA)
+end
+
+shared.ParadisDataService = {
+    LoadPlayerData = loadPlayerData,
+    SavePlayerData = savePlayerData,
+    GetDefaultData = getDefaultData,
+}

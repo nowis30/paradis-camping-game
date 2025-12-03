@@ -1,0 +1,24 @@
+{
+    "$schema": "https://rojo.space/schemas/project.json",
+    "name": "ParadisDesParcelles",
+    "servePort": 34872,
+    "tree": {
+        "$className": "DataModel",
+        "ReplicatedStorage": {
+            "$path": "src/ReplicatedStorage",
+            "$ignoreUnknownInstances": true
+        },
+        "ServerScriptService": {
+            "$path": "src/ServerScriptService",
+            "$ignoreUnknownInstances": true
+        },
+        "StarterPlayer": {
+            "StarterPlayerScripts": {
+                "$path": "src/StarterPlayer/StarterPlayerScripts"
+            }
+        },
+        "StarterGui": {
+            "$path": "src/StarterGui"
+        }
+    }
+}
