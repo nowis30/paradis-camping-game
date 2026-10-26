@@ -7,13 +7,14 @@
 local DataStoreService = game:GetService("DataStoreService")
 local RunService = game:GetService("RunService")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local Players = game:GetService("Players")
+local PersistentPlayerData = require(script.Parent:WaitForChild("PersistentPlayerData"))
 
 local configFolder = ReplicatedStorage:WaitForChild("Config")
 local CampConfig = require(configFolder:WaitForChild("CampConfig"))
 local EconomyConfig = require(configFolder:WaitForChild("EconomyConfig"))
 
 local STORE_NAME = "ParadisPlots_v2"
-local cache = {}
 local store
 
 local DEFAULT_CASH = (EconomyConfig.General and EconomyConfig.General.StartingCash) or 0
@@ -91,51 +92,57 @@ local function normalizeData(data)
     return data
 end
 
-local function loadPlayerData(userId)
-    if cache[userId] then
-        return cache[userId]
-    end
-
-    local data
-    if store and not STUDIO_READ_ONLY then
-        local ok, resultData = pcall(function()
-            return store:GetAsync(tostring(userId))
-        end)
-        if ok then
-            data = normalizeData(resultData)
-        else
-            logDataStoreError("Load", userId, resultData)
-            data = deepCopyTable(DEFAULT_DATA)
-        end
-    else
-        data = deepCopyTable(DEFAULT_DATA)
-    end
-
-    cache[userId] = data
-    return data
-end
-
-local function savePlayerData(userId, data)
-    data = normalizeData(data)
-    cache[userId] = data
-    if not store or STUDIO_READ_ONLY then
-        return
-    end
-
-    local ok, err = pcall(function()
-        store:SetAsync(tostring(userId), data)
-    end)
-    if not ok then
-        logDataStoreError("Save", userId, err)
-    end
-end
-
 local function getDefaultData()
     return deepCopyTable(DEFAULT_DATA)
 end
 
+local persistence = PersistentPlayerData.new({
+    readOnly = STUDIO_READ_ONLY,
+    attempts = 3,
+    wait = task.wait,
+    defaults = getDefaultData,
+    normalize = normalizeData,
+    read = function(userId)
+        if not store then error("DataStore unavailable") end
+        return store:GetAsync(tostring(userId))
+    end,
+    write = function(userId, data)
+        if not store then error("DataStore unavailable") end
+        store:SetAsync(tostring(userId), data)
+    end,
+    onLoadFailure = function(userId, err)
+        logDataStoreError("Load", userId, err)
+        local player = Players:GetPlayerByUserId(userId)
+        if player then
+            player:SetAttribute("ParadisDataLoaded", false)
+            player:Kick("Ta sauvegarde est temporairement inaccessible. Reconnecte-toi dans quelques instants; tes données existantes sont préservées.")
+        end
+    end,
+    onSaveFailure = function(userId, err)
+        logDataStoreError("Save", userId, err)
+    end,
+})
+
+local function loadPlayerData(userId)
+    local data, loaded = persistence.Load(userId)
+    local player = Players:GetPlayerByUserId(userId)
+    if player then player:SetAttribute("ParadisDataLoaded", loaded) end
+    return data, loaded
+end
+
+-- Register before publishing the API so a reconnect can retry a failed read.
+-- Keep a healthy cache: a departing player's final save may still be in flight.
+Players.PlayerAdded:Connect(function(player)
+    persistence.ResetFailed(player.UserId)
+end)
+Players.PlayerRemoving:Connect(function(player)
+    task.delay(30, function()
+        if not Players:GetPlayerByUserId(player.UserId) then persistence.Reset(player.UserId) end
+    end)
+end)
+
 shared.ParadisDataService = {
     LoadPlayerData = loadPlayerData,
-    SavePlayerData = savePlayerData,
+    SavePlayerData = persistence.Save,
     GetDefaultData = getDefaultData,
 }

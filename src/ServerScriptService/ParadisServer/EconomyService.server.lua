@@ -130,10 +130,10 @@ end
 
 local function persistPlayer(player, state)
     if not state or not state.Data then
-        return
+        return false, "NO_PLAYER_DATA"
     end
     state.Data.Cash = roundCurrency(state.Cash)
-    DataService.SavePlayerData(player.UserId, state.Data)
+    return DataService.SavePlayerData(player.UserId, state.Data)
 end
 
 local function getEconomyEntry(catalog, objectId)
@@ -274,9 +274,10 @@ end
 
 EconomyRemotes.RequestManualSave.OnServerInvoke = function(player)
     local state = ensureState(player)
-    persistPlayer(player, state)
+    local saved, reason = persistPlayer(player, state)
     return {
-        Success = true,
+        Success = saved == true,
+        Error = not saved and reason or nil,
         Cash = roundCurrency(state.Cash),
         Timestamp = os.time(),
     }
