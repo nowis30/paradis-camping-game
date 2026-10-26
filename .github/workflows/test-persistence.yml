@@ -1,0 +1,21 @@
+name: Player data persistence
+on:
+  push:
+    branches: [main]
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  persistence:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+        with:
+          repository: luau-lang/luau
+          ref: 32c28089305f488f901aaf1dbf3fd1cb65fa3d11
+          path: .tools/luau
+      - name: Build pinned official Luau runtime
+        run: make -C .tools/luau config=release -j2 luau
+      - name: Check persistence failure and recovery
+        run: .tools/luau/luau tests/persistence.luau
